@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+
+*.env
+*.dev
+.DS_Store
+
+.idea/
+package-lock.json
+
+server.express.js
+dist/*

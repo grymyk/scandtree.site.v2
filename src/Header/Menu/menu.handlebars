@@ -1,0 +1,13 @@
+<a href="#" id="hamburger" class="nav-toggle">
+    <span></span>
+</a>
+<div class="desktop_menu_holder">
+    <ul>
+        {{#each items}}
+            <li>
+                <a href={{this.href}}>{{this.name}}</a>
+            </li>
+        {{/each}}
+    </ul>
+    <div id="nav-indicator"></div>
+</div>
