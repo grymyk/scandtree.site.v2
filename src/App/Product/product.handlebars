@@ -1,0 +1,22 @@
+<div id="product" class="content container">
+    <header>
+        <h3>{{title}}</h3>
+    </header>
+    <div class="box container 75%">
+        {{#each products}}
+            <div class="5u 12u(mobile) image left">
+                <img src="images/{{this.images.src}}" title={{this.images.title}} alt={{this.images.title}} />
+                <h4>{{this.subtitle}}</h4>
+
+                <ul class="tree_params">
+                    {{#each params}}
+                        <li>
+                            <span>{{this.name}}</span>
+                            <span>{{this.size}}</span>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        {{/each}}
+    </div>
+</div>

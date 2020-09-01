@@ -1,0 +1,22 @@
+<div class="content container">
+    <header class="container 75%">
+        <h3>{{title}}</h3>
+        <p>{{desc}}</p>
+    </header>
+
+    <div id="ig_stats"></div>
+
+    <div class="container 75% gallery">
+        <div class="content"></div>
+
+        <ul>
+            {{#each images}}
+                <li>
+                    <a href="images/fulls/{{this.name}}" class="image fit">
+                        <img src="images/thumbs/{{this.name}}" title="{{this.title}}" alt="scandinavian tree" />
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</div>

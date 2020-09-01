@@ -1,5 +1,6 @@
 import './header.scss';
 
+import Header from './header';
 import Logo from './Logo';
 import Menu from './Menu';
 
@@ -10,26 +11,21 @@ let scandtreeLogo = new Logo({
 
 const scandtreeMenu = new Menu({
     items: [{
-        href: '#about',
         name: 'about',
     },{
-        href: '#gallery',
         name: 'gallery'
     },{
-        href: '#former',
         name: 'former'
     },{
-        href: '#products',
         name: 'products'
     },{
-        href: '#contacts',
         name: 'contacts'
     }]
 })
 
-const header = document.createDocumentFragment();
+const header = new Header().elem;
 
-header.appendChild(scandtreeLogo.elem);
+header.append(scandtreeLogo.elem);
 header.appendChild(scandtreeMenu.elem);
 
 export default header;
