@@ -4,14 +4,14 @@
   "description": "js",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "eslint .",
     "dev": "webpack-dev-server --config ./webpack.config.js --mode development",
     "start": "node server.js",
     "build": "webpack --mode production",
     "heroku-postbuild": "webpack -p"
   },
   "keywords": [],
-  "author": "",
+  "author": "Mykola",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.11.1",
@@ -22,6 +22,7 @@
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^4.2.1",
+    "eslint": "^7.8.1",
     "file-loader": "^4.2.0",
     "handlebars": "^4.7.6",
     "handlebars-loader": "^1.7.1",

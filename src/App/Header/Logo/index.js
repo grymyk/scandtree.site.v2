@@ -1,5 +1,5 @@
-import './logo.scss'
-import logoTemplate from './logo.handlebars'
+import './logo.scss';
+import logoTemplate from './logo.handlebars';
 
 class Logo {
     constructor(options) {
@@ -9,8 +9,8 @@ class Logo {
         this.elem.onclick = this.clickHandler;
     }
 
-    clickHandler = () => {
-        console.log('Scroll Top')
+    clickHandler() {
+        console.log('Scroll Top');
     }
 }
 

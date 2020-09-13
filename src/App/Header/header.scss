@@ -5,14 +5,7 @@
 	top: 0;
 	width: 100%;
 	background: rgba(255, 255, 255, 0.9);
-	overflow: hidden;
+	height: 70px;
+	line-height: 70px;
+	overflow: visible;
 }
-
-@media (max-width: 1024px) {
-	#header {
-		height: 50px;
-		line-height: 50px;
-		overflow: visible;
-	}
-}
-

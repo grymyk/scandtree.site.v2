@@ -17,10 +17,11 @@ Lodash template function tutorials with examples
 
 Responsive Web Design
 - [Media Queries for Desktop, Tablet, Mobile](https://gist.github.com/gokulkrishh/242e68d1ee94ad05f488)
-(max-width: 1281px)
-(max-width: 1025px)
-(max-width: 481px)
-(max-width: 320px) 
+(min-width: 1281px)
+(min-width: 1025px)
+(min-width: 768px)
+(min-width: 481px)
+(min-width: 320px) 
 
 - [css-tricks/approaches-media-queries-sass/](https://css-tricks.com/approaches-media-queries-sass/)
 - [include-media/](https://eduardoboucas.github.io/include-media/)

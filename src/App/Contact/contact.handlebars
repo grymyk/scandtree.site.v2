@@ -1,46 +1,50 @@
-<div class="content container">
-    <header class="container 75%">
-        <h3>{{title}}</h3>
-        <p>{{desc}}</p>
-    </header>
-    <div class="box container 75%">
-        <ul class="contacts_list">
-            {{#each contacts}}
-                <li>
-                    {{this.name}} <a href="{{this.href}}">{{this.value}}</a>
+<div class="content">
+    <h2>{{title}}</h2>
+    <div class="desc">{{desc}}</div>
+
+    <ul class="contacts_list">
+        {{#each contacts}}
+            <li>
+                <ul>
+                    <li>{{this.name}}</li>
+                    <li>
+                        <a href="{{this.href}}">{{this.value}}</a>
+                    </li>
+                </ul>
+            </li>
+        {{/each}}
+    </ul>
+
+    <h3>{{subtitle}}</h3>
+
+    <form id="ajax-contact" method="post" action={{action}}>
+        <ul class="input_list">
+            {{#each inputs}}
+                <li class="input_item">
+                    <h4>{{name}}</h4>
+                        <input type={{type}}
+                            id={{name}}
+                            name={{name}}
+                            placeholder={{placeholder}}
+                            autocomplete={{autocomplete}}
+                            required />
                 </li>
             {{/each}}
         </ul>
-        <h4>{{subtitle}}</h4>
-        <form id="ajax-contact" method="post" action={{action}}>
-            <ul class="row 50%">
-                {{#each inputs}}
-                    <li class="4u 12u(mobile)">
-                        <h5>{{name}}</h5>
-                        <input type={{type}}
-                                id={{name}}
-                                name={{name}}
-                                placeholder={{placeholder}}
-                                autocomplete={{autocomplete}}
-                                class="dirty"
-                                required />
-                    </li>
-                {{/each}}
-            </ul>
-            <div class="row 50%">
-                <h5>{{textarea.name}}</h5>
-                <textarea
-                        id={{textarea.name}}
-                        name={{textarea.name}}
-                        placeholder="Hello Scandinavian Tree ..."
-                        rows={{textarea.rows}}
-                        required >
-                </textarea>
-            </div>
-            <div class="row">
-                <input type="submit" value="Order a tree" />
-            </div>
-        </form>
-        <div id="form-messages"><span></span></div>
-    </div>
+
+        <div class="textarea_holder">
+            <h4>{{textarea.name}}</h4>
+            <textarea
+                    id={{textarea.name}}
+                    name={{textarea.name}}
+                    placeholder={{textarea.placeholder}}
+                    rows={{textarea.rows}}
+                    required >
+            </textarea>
+        </div>
+        <div class="order_btn">
+            <input type="submit" value="Order a tree" />
+        </div>
+    </form>
+    <div id="form-messages"><span></span></div>
 </div>

@@ -15,6 +15,7 @@ function setNavIndicator(current) {
     });
 }
 
+/*
 $window.on('scroll', () => {
     const scrolled = $window.scrollTop();
 
@@ -31,3 +32,10 @@ $window.on('scroll', () => {
         }
     }
 });
+*/
+
+const scrollHandler = () => {
+    // console.log('scroll Y:', window.pageYOffset);
+};
+
+window.addEventListener('scroll', scrollHandler);

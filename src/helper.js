@@ -1,16 +1,14 @@
 const app = {};
 
-app.append = (components) => {
-    document.addEventListener("DOMContentLoaded", () => {
-        // const {parent, child} = props;
+app.append = (components, fn) => {
+    // console.log(components);
 
-        // parent.appendChild(child);
-
-        components.forEach( (component) => {
-            document.body.appendChild(component);
-        });
+    components.forEach((component) => {
+        // console.log(component.id);
+        document.body.append(component);
     });
-};
 
+    fn('load');
+};
 
 export default app.append;

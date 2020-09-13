@@ -1,4 +1,4 @@
-import footerTemplate from './footer.handlebars'
+import footerTemplate from './footer.handlebars';
 
 class Footer {
     constructor(options) {
@@ -9,4 +9,4 @@ class Footer {
     }
 }
 
-export default Footer
+export default Footer;

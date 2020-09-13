@@ -1,16 +1,15 @@
+import './footer.scss';
 import Footer from './footer';
 
 const sectionFooter = new Footer({
-    socio_nets: [{
+    socioNets: [{
         href: 'https://www.facebook.com/scandtree',
-        label: 'facebook',
-        cls: 'icon facebook'
+        label: 'facebook'
     }, {
         href: 'https://www.instagram.com/scandtree/',
-        label: 'Instagram',
-        cls: 'icon instagram'
+        label: 'instagram'
     }],
     year: '2020',
-})
+});
 
 export default sectionFooter.elem;

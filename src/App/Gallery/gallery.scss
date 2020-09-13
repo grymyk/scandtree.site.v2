@@ -1,0 +1,52 @@
+#gallery h3 {
+	margin: 50px 0 0;
+
+	&:before {
+		width: 2em;
+		height: 2em;
+		background: url('./ig_logo.png') 0 0 no-repeat;
+		position: absolute;
+		content: '';
+		margin: 0.15em 0 0 -1.1em;
+	}
+
+	.desc {
+		font-size: 22px;
+		line-height: 30px;
+		width: 45%;
+		margin: 0 auto;
+	}
+}
+
+.img_holder {
+	width: 1020px;
+	margin: 0 auto;
+	overflow: hidden;
+
+	li {
+		width: 27.33%;
+		float: left;
+		border: 30px solid #fff;
+		position: relative;
+		height: 400px;
+	}
+}
+
+#ig_stats {
+	//padding: 1em 2em 0;
+	text-align: center;
+
+	ul {
+		display: inline-block;
+		padding: 0 0.5em;
+
+		li {
+			display: inline-block;
+
+			span {
+				padding: 0 0.25em 0 0;
+				font-weight: 700;
+			}
+		}
+	}
+}

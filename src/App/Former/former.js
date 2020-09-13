@@ -1,4 +1,4 @@
-import formerTemplate from './former.handlebars'
+import formerTemplate from './former.handlebars';
 
 class Former {
     constructor(options) {
@@ -9,4 +9,4 @@ class Former {
     }
 }
 
-export default Former
+export default Former;

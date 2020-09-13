@@ -1,0 +1,50 @@
+.bg_img {
+	background: url('./about_bg.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #fff;
+}
+
+#about {
+	&:before {
+		content: '';
+		display: inline-block;
+		height: 100%;
+		vertical-align: middle;
+	}
+
+	.content {
+		display: inline-block;
+		vertical-align: middle;
+		text-align: center;
+		width: 100%;
+	}
+}
+
+.motto {
+	height: 286px;
+	overflow: hidden;
+	width: 60%;
+	margin: 32px auto 64px;
+	font-size: 32px;
+	line-height: 48px;
+	text-transform: uppercase;
+}
+
+@media (min-width: 786px) {
+	.motto {
+		height: 335px;
+	}
+}
+
+@media (min-width: 1025px) {
+	.motto {
+		height: 240px;
+	}
+}
+
+@media (min-width: 1025px) {
+	.motto {
+		height: 195px;
+	}
+}

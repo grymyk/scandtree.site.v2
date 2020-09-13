@@ -1,13 +1,13 @@
-import contactTemplate from './contact.handlebars'
+import contactTemplate from './contact.handlebars';
 
 class Contact {
     constructor(options) {
         this.elem = document.createElement('div');
         this.elem.id = 'contacts';
-        this.elem.className = 'main style3 secondary';
+        // this.elem.className = 'bg_color';
 
         this.elem.innerHTML = contactTemplate(options);
     }
 }
 
-export default Contact
+export default Contact;
