@@ -17,28 +17,28 @@
 
     <h3>{{subtitle}}</h3>
 
-    <form id="ajax-contact" method="post" action={{action}}>
+    <form id="ajax-contact" method="post" action="{{action}}">
         <ul class="input_list">
             {{#each inputs}}
                 <li class="input_item">
-                    <h4>{{name}}</h4>
-                        <input type={{type}}
-                            id={{name}}
-                            name={{name}}
-                            placeholder={{placeholder}}
-                            autocomplete={{autocomplete}}
-                            required />
+                    <label for="{{name}}">{{name}}</label>
+                    <input type="{{type}}"
+                        id="{{name}}"
+                        name="{{name}}"
+                        placeholder="{{placeholder}}"
+                        autocomplete="{{autocomplete}}"
+                        required />
                 </li>
             {{/each}}
         </ul>
 
         <div class="textarea_holder">
-            <h4>{{textarea.name}}</h4>
+            <label for="{{textarea.name}}">{{textarea.name}}</label>
             <textarea
-                    id={{textarea.name}}
-                    name={{textarea.name}}
-                    placeholder={{textarea.placeholder}}
-                    rows={{textarea.rows}}
+                    id="{{textarea.name}}"
+                    name="{{textarea.name}}"
+                    placeholder="{{textarea.placeholder}}"
+                    rows="{{textarea.rows}}"
                     required >
             </textarea>
         </div>

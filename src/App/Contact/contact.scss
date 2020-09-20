@@ -47,6 +47,8 @@ h3 {
 form {
 	label {
 		display: block;
+		margin: 10px 0 0;
+		font-weight: 700;
 	}
 
 	input[type="text"],
@@ -101,10 +103,6 @@ form {
 .textarea_holder {
 	margin: 0 auto;
 	width: 88%;
-}
-
-h4 {
-	margin: 10px 0 0;
 }
 
 .order_btn {

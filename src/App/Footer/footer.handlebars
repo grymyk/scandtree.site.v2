@@ -2,13 +2,15 @@
     <ul class="social_networks">
         {{#each socioNets}}
             <li>
-                <a target="_blank" href={{href}} class="icon {{label}}" rel="noopener" >
+                <a target="_blank" href="{{href}}"
+                    class="icon {{label}}" rel="noopener">
                     <span class="label">{{label}}</span>
                 </a>
             </li>
         {{/each}}
     </ul>
-    <div class="copyright">
-        &copy;2015&mdash;{{year}} Scandinavian Tree
-    </div>
+    <ul class="copyright">
+        <li>&copy;2015&mdash;{{year}}</li>
+        <li>Scandinavian Tree</li>
+    </ul>
 </div>

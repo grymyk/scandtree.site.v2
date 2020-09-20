@@ -1,11 +1,13 @@
-<a href="#" id="hamburger" class="nav-toggle">
+<a href="#" id="hamburger">
     <span></span>
 </a>
 <div id="desktop">
     <ul>
         {{#each items}}
             <li>
-                <a href="#{{this.name}}">{{this.name}}</a>
+                <a class="{{cls}}" href="#{{this.name}}">
+                    {{this.name}}
+                </a>
             </li>
         {{/each}}
     </ul>

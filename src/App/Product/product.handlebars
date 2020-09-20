@@ -2,8 +2,10 @@
 <ul class="product_list">
     {{#each products}}
         <li class="product_item">
-            <img src="images/{{this.images.src}}" title={{this.images.title}} alt={{this.images.title}} />
-
+            <img src="{{this.images.src}}"
+                 title="{{this.images.title}}"
+                 alt="{{this.images.title}}"
+            />
             <h3>{{this.subtitle}}</h3>
             <ul class="tree_params">
                 {{#each params}}

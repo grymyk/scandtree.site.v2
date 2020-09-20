@@ -1,14 +1,11 @@
 const app = {};
 
-app.append = (components, fn) => {
-    // console.log(components);
-
-    components.forEach((component) => {
-        // console.log(component.id);
-        document.body.append(component);
-    });
-
-    fn('load');
+app.append = (components) => {
+	components.forEach((component) => {
+		document.body.append(component);
+	});
 };
 
-export default app.append;
+export default {
+	append: app.append
+};

@@ -1,89 +1,55 @@
 import './menu.scss';
 import menuTemplate from './menu.handlebars';
 
-// import './scroll';
-import './menu';
-
-const scrollToBlock = (target) => {
-    const HEADER_HEIGHT = 70;
-
-    const idBlock = target.getAttribute('href').slice(1);
-    const block = document.getElementById(idBlock);
-    const shift = block.offsetTop - HEADER_HEIGHT;
-    const offsetTop = Math.ceil(shift);
-
-    const scrollOptions = {
-        left: 0,
-        top: offsetTop,
-        behavior: 'smooth'
-    };
-
-    window.scrollTo(scrollOptions);
-};
-
-const getMetrix = (elem) => {
-    const parent = elem.parentNode;
-    const style = window.getComputedStyle(parent);
-
-    const width = style.getPropertyValue('width');
-    const left = parent.offsetLeft;
-
-    console.log(width, left);
-
-    return { width, left };
-};
-
-const setMetrix = (width, left) => {
-    const indicator = document.getElementById('nav-indicator');
-
-    indicator.style.width = width;
-    indicator.style.left = left + 'px';
-};
-
-const setCursor = (active) => {
-    console.log('setCursor');
-
-    const { width, left } = getMetrix(active);
-
-    setMetrix(width, left);
-};
+import './scroll';
+import { scrollToBlock, setCursor, toggleClick }  from './cursor';
 
 class Menu {
-    constructor(options) {
-        this.elem = document.createElement('div');
-        this.elem.id = 'nav';
-        this.elem.innerHTML = menuTemplate(options);
+	constructor(options) {
+		const { modileWidth } = options;
+		const { items } = options;
 
-        this.hamburger = this.elem.querySelector('#hamburger');
-        this.hamburger.addEventListener('click', this.hamburgerClickHandler);
+		this.elem = document.createElement('div');
+		this.elem.id = 'nav';
+		this.elem.mobileWidth = modileWidth;
+		this.elem.innerHTML = menuTemplate({ items });
 
-        this.desktopMenu = this.elem.querySelector('#desktop ul');
-        this.desktopMenu.addEventListener('click', this.clickHandler);
-        this.desktopMenu.addEventListener('load', this.loadHandler);
-    }
+		this.hamburger = this.elem.querySelector('#hamburger');
+		this.hamburger.addEventListener('click', this.hamburgerClickHandler);
 
-    loadHandler() {
-        console.log('load menu');
-    }
+		this.clickHandler = this.clickHandler.bind(this.elem);
 
-    hamburgerClickHandler(event) {
-        console.log('hamburder click');
+		this.desktopMenu = this.elem.querySelector('#desktop ul');
+		this.desktopMenu.addEventListener('click', this.clickHandler);
 
-        event.preventDefault();
+		this.resizeHandler = this.resizeHandler.bind(this.elem);
 
-        const nav = document.getElementById('nav');
+		window.addEventListener('resize', this.resizeHandler);
+	}
 
-        nav.classList.toggle('open');
-    }
+	hamburgerClickHandler(event) {
+		event.preventDefault();
+		const nav = document.getElementById('nav');
 
-    clickHandler(event) {
-        event.preventDefault();
+		nav.classList.toggle('open');
+	}
 
-        const active = event.target;
+	clickHandler(event) {
+		event.preventDefault();
 
-        scrollToBlock(active);
-        setCursor(active);
-    }
+		const idBlock = event.target.getAttribute('href');
+
+		scrollToBlock(idBlock);
+		toggleClick(idBlock);
+		setCursor(idBlock, this.mobileWidth);
+	}
+
+	resizeHandler() {
+		const active = document.querySelector('#desktop .active');
+		const idBlock = active.getAttribute('href');
+
+		setCursor(idBlock, this.mobileWidth);
+	}
 }
 
 export default Menu;

@@ -56,11 +56,14 @@
 }
 
 .copyright {
-	height: 20px;
-	line-height: 20px;
 	margin: 20px 10px 0;
-	font-size: 20px;
 	text-align: center;
+
+	li {
+		font-size: 20px;
+		line-height: 25px;
+		display: block;
+	}
 }
 
 @media (min-width: 768px) {
@@ -77,6 +80,10 @@
 	.copyright {
 		float: right;
 		margin: 7px 10px 0;
+
+		li {
+			display: inline-block;
+		}
 	}
 }
 
