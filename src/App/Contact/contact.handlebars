@@ -27,7 +27,7 @@
                         name="{{name}}"
                         placeholder="{{placeholder}}"
                         autocomplete="{{autocomplete}}"
-                        required />
+                    />
                 </li>
             {{/each}}
         </ul>
@@ -38,13 +38,14 @@
                     id="{{textarea.name}}"
                     name="{{textarea.name}}"
                     placeholder="{{textarea.placeholder}}"
-                    rows="{{textarea.rows}}"
-                    required >
-            </textarea>
+                    rows="{{textarea.rows}}"></textarea>
         </div>
         <div class="order_btn">
             <input type="submit" value="Order a tree" />
         </div>
     </form>
-    <div id="form-messages"><span></span></div>
+    <div class="form-messages-holder">
+        <div id="form-messages"><span></span></div>
+    </div>
+
 </div>

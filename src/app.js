@@ -1,8 +1,8 @@
-import './reset.scss';
-import './main.scss';
+import './css/reset.scss';
+import './css/main.scss';
 
-import app from './helper';
-// console.log(app);
+import app from './js/helper.js';
+import './js/scroll.js';
 
 import Header from './App/Header';
 import About from './App/About';
@@ -16,14 +16,12 @@ const loadHandler = () => {
 	const components = [
 		Header,
 		About,
-		// Gallery,
-		// Former,
 		Product,
 		Contact,
 		Footer
 	];
 
-	app.append(components);
+	app.prepend(components);
 };
 
 document.addEventListener('DOMContentLoaded', loadHandler);

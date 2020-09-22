@@ -7,6 +7,7 @@ class About {
 		this.elem.id = 'gallery';
 		// this.elem.className = 'main';
 		this.elem.innerHTML = galleryTemplate(options);
+		// this.elem.load = () => console.log(this.elem.id);
 	}
 }
 

@@ -1,8 +1,8 @@
 import './header.scss';
 
-import Header from './header';
-import Logo from './Logo';
-import Menu from './Menu';
+import Header from './header.js';
+import Logo from './Logo/logo.js';
+import Menu from './Menu/menu.js';
 
 const scandtreeLogo = new Logo({
 	href: '#about',
