@@ -1,7 +1,7 @@
 import './product.scss';
 import Product from './product';
-import small from './images/small.jpg';
-import big from './images/big.jpg';
+import small from './img/small.jpg';
+import big from './img/big.jpg';
 
 const sectionFormer = new Product({
 	title: 'products',
@@ -13,7 +13,7 @@ const sectionFormer = new Product({
 		},
 		params: [{
 			name: 'height:',
-			size: '22sm'
+			size: '22 sm'
 		}, {
 			name: 'branch:',
 			size: '5 peaces.'

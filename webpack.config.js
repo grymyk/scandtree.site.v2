@@ -4,7 +4,7 @@ module.exports = {
 	entry: './src/app.js',
 	output: {
 		path: __dirname + '/dist',
-		publicPath: '/',
+		publicPath: './',
 		filename: 'bundle.js'
 	},
 	devServer: {
@@ -39,7 +39,7 @@ module.exports = {
 				loader: 'file-loader',
 				options: {
 					name: '[name].[ext]',
-					outputPath: 'images/'
+					outputPath: './img/'
 				}
 			}],
 		}, {
