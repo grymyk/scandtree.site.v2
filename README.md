@@ -1,10 +1,10 @@
-#sass
+sass
 [Media queries in Sass](http://thesassway.com/intermediate/responsive-web-design-part-2)
 
-# webpack-project
+webpack-project
 [valentinog.com/webpack](https://www.valentinog.com/blog/webpack/)
 
-## landing webpack
+landing webpack
 - [landing-with-webpack](https://medium.com/@jonas_duri/build-a-landing-page-with-webpack-4-6efe83deb7fe)
 - [статический сайт на Webpack 4](https://habr.com/ru/post/350886/)
 
@@ -26,8 +26,6 @@ Responsive Web Design
 - [css-tricks/approaches-media-queries-sass/](https://css-tricks.com/approaches-media-queries-sass/)
 - [include-media/](https://eduardoboucas.github.io/include-media/)
 - [web.dev/responsive-web-design-basics/](https://web.dev/responsive-web-design-basics/#breakpoints)
-
-
 
 LoDash
 - [lodash.com/4.17.15#template](https://lodash.com/docs/4.17.15#template)
