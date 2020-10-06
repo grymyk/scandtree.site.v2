@@ -7,6 +7,7 @@ class Contact {
 		this.elem.id = 'contacts';
 		this.elem.innerHTML = contactTemplate(options);
 
+		this.loadHandler = this.loadHandler.bind(this.elem);
 		this.elem.load = this.loadHandler;
 	}
 

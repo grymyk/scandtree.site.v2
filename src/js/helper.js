@@ -18,7 +18,13 @@ const insertPage = (components) => {
 };
 
 const loadFns = (fns) => {
-	fns.forEach((fn) => fn());
+	// console.log(fns);
+
+	fns.forEach((fn) => {
+		// console.log(fn);
+
+		fn();
+	});
 };
 
 app.prepend = (components) => {
@@ -30,26 +36,3 @@ app.prepend = (components) => {
 export default {
 	prepend: app.prepend
 };
-
-
-/*
-const filter = (options) => {
-	const { src, dest, key, operator, callback } = options;
-
-	src.forEach((elem) => {
-		dest.operator(elem.key);
-	});
-
-	callback(dest);
-};
-
-const iterate = (data) => {
-	data.forEach((elem) => {
-		dest.operator(elem);
-		dest.operator(elem.key);
-	});
-
-
-};
-*/
-

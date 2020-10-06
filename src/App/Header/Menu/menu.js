@@ -26,28 +26,36 @@ class Menu {
 
 		this.elem = document.createElement('div');
 		this.elem.id = 'nav';
-		this.elem.mobileWidth = modileWidth;
 		this.elem.innerHTML = menuTemplate({ items });
 
-		this.hamburgerClickHandler = this.hamburgerClickHandler.bind(this.elem);
+		this.loadHandler = this.loadHandler.bind(this.elem);
+		this.elem.load = this.loadHandler;
+
+		this.elem.mobileWidth = modileWidth;
 
 		this.hamburger = this.elem.querySelector('#hamburger');
-		this.hamburger.addEventListener('click', this.hamburgerClickHandler);
-
-		this.clickHandler = this.clickHandler.bind(this.elem);
+		this.hamburgerHandler = this.hamburgerHandler.bind(this.elem);
+		this.hamburger.addEventListener('click', this.hamburgerHandler);
 
 		this.desktopMenu = this.elem.querySelector('#desktop ul');
+		this.clickHandler = this.clickHandler.bind(this.elem);
 		this.desktopMenu.addEventListener('click', this.clickHandler);
 
 		this.resizeHandler = this.resizeHandler.bind(this.elem);
-
 		window.addEventListener('resize', this.resizeHandler);
 	}
 
-	hamburgerClickHandler(event) {
+	hamburgerHandler(event) {
+		// console.log('hamburgerHandler');
+
 		event.preventDefault();
 
 		this.classList.toggle('open');
+	}
+
+	loadHandler() {
+		console.log(this.id);
+		// this.hamburgerHandler(event);
 	}
 
 	clickHandler(event) {

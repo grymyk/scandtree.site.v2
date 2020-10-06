@@ -108,6 +108,16 @@ form {
 	textarea {
 		height: 153px;
 	}
+
+	label[for="name"],
+	label[for="message"],
+	label[for="email"] {
+		&:after {
+			content: "*";
+			position: absolute;
+			color: rgb(255 0 0 / 50%);
+		}
+	}
 }
 
 .input_list {
@@ -116,6 +126,7 @@ form {
 	.input_item {
 		margin: 0 auto;
 		width: 88%;
+		position: relative;
 	}
 }
 

@@ -1,42 +1,50 @@
-<div class="content container">
-    <div class="box container 75%">
-        <h3>{{title}}</h3>
+<div class="content">
+    <h2>{{title}}</h2>
 
-        <div id="scandtree">
-            <div id="tree_holder"></div>
+    <div id="scandtree">
+        <div id="tree_holder"></div>
 
-            <div id="input_params" data-owner="admin">
-                <h4 data-action="toggle">{{subtitle}}</h4>
+        <div id="input_params">
+            <h4 data-action="toggle">{{subtitle}}</h4>
 
-                <ul>
-                    {{#each inputs}}
-                        <li data-mode="typeTree" class="mode">
-                            <label for={{this.name}}>{{this.name}}</label>
-                            <input data-parameter={{this.name}}
-                                   value={{this.value}}
-                                   id={{this.name}}
-                                   min={{this.min}}
-                                   max={{this.max}}
-                                   name={{this.name}}
-                                   type="tel"
-                                   step="1"
-                                   readonly
-                                   class="readonly"
-                            />
-                            <div class="voter">
-                                <span data-action="change" data-action-change="down" class="down">&#8722;</span>
-                                <span data-action="change" data-action-change="up" class="up">+</span>
-                            </div>
-                        </li>
-
-                    {{/each}}
-
-
-                    <li data-action="toggle">
-                        <span data-action="reset" class="reset lock">{{reset}}</span>
+            <ul>
+                {{#each inputs}}
+                    <li class="mode">
+                        <label for={{this.name}}>{{this.name}}</label>
+                        <input data-parameter={{this.name}}
+                               value={{this.value}}
+                               id={{this.name}}
+                               min={{this.min}}
+                               max={{this.max}}
+                               name={{this.name}}
+                               type="tel"
+                               step="1"
+                               readonly
+                               class="readonly"
+                        />
+                        <div class="voter">
+                            <span class="down"
+                                    data-action="change"
+                                    data-action-change="down"
+                                >&#8722;
+                            </span>
+                            <span class="up"
+                                    data-action="change"
+                                    data-action-change="up"
+                                >+
+                            </span>
+                        </div>
                     </li>
-                </ul>
-            </div>
+
+                {{/each}}
+
+                <li>
+                    <span class="reset lock"
+                          data-action="reset"
+                    >{{reset}}
+                    </span>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

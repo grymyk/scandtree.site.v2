@@ -17,10 +17,11 @@ const scandtreeMenu = new Menu({
 	},
 	// {
 	//     name: 'gallery'
-	// },{
-	//     name: 'former'
 	// }
 	{
+		name: 'former',
+		cls: ''
+	}, {
 		name: 'products',
 		cls: ''
 	}, {
@@ -29,7 +30,11 @@ const scandtreeMenu = new Menu({
 	}]
 });
 
-const header = new Header().elem;
+const options = {
+	menuLoad: scandtreeMenu.elem.load
+};
+
+const header = new Header(options).elem;
 
 header.append(scandtreeLogo.elem);
 header.append(scandtreeMenu.elem);

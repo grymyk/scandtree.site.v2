@@ -19,23 +19,27 @@ const sectionContact = new Contact({
 	inputs: [{
 		name: 'name',
 		placeholder: 'Mykola',
+		required: 'required',
 		type: 'text',
-		autocomplete: 'name'
+		autocomplete: 'name',
 	}, {
 		name: 'phone',
 		placeholder: '+380936317033',
+		required: '',
 		type: 'tel',
-		autocomplete: 'tel'
+		autocomplete: 'tel',
 	}, {
 		name: 'email',
 		placeholder: 'mykola@gmail.com',
+		required: 'required',
 		type: 'email',
 		autocomplete: 'email'
 	}],
 	textarea: {
 		name: 'message',
 		placeholder: 'Hello Scandinavian Tree',
-		rows: '6'
+		required: 'required',
+		rows: '6',
 	}
 });
 

@@ -1,7 +1,7 @@
 import { setCursor, toggleClick } from '../cursor';
 
 const getBlocks = (names) => {
-	const sizes = {};
+	const sizes = [];
 	const maxes = [-1];
 
 	const windowHeight = window.innerHeight;
@@ -24,63 +24,61 @@ const getBlocks = (names) => {
 	for (let i = 0, len = maxes.length - 1; i < len; i += 1) {
 		const name = names[i];
 
-		sizes[name] = {
+		const blockParam = {
+			name,
 			min: maxes[i] + 1,
 			max: maxes[i + 1]
 		};
+
+		sizes.push(blockParam);
 	}
 
 	return sizes;
 };
 
-const getMin = (blocks, name) => blocks[name]['min'];
-const getMax = (blocks, name) => blocks[name]['max'];
+let offsetY = 0;
+
+const interval = (params) => (
+	params.min <= offsetY && offsetY <= params.max
+);
 
 function setCurrentItem(windowScrollY, options) {
-	const { blockNames, mobileWidth } = options;
+	const { menuItems, mobileWidth } = options;
 
-	const blocks = getBlocks(blockNames);
+	offsetY = windowScrollY;
 
-	for (const name in blocks) {
-		const min = getMin(blocks, name);
-		const max = getMax(blocks, name);
+	const blocks = getBlocks(menuItems);
+	// console.log(blocks);
 
-		if (windowScrollY >= min && windowScrollY < max) {
-			const idBlock = '#' + name;
+	const currentBlock = blocks.filter(interval);
+	// console.log(currentBlock);
+	// console.log(currentBlock.length);
 
-			toggleClick(idBlock);
-			setCursor(idBlock, mobileWidth);
-		}
-	}
+	const currentBlockName = currentBlock[0]['name'];
+	const idBlock = '#' + currentBlockName;
+
+	toggleClick(idBlock);
+	setCursor(idBlock, mobileWidth);
 }
 
-const mobileWidth = 1024;
+const setScroll = (options) => {
+	let windowScrollY = 0;
+	let ticking = false;
 
-const blockNames = [
-	'about',
-	'products',
-	'contacts'
-];
+	const scrollHandler = () => {
+		windowScrollY = window.scrollY;
 
-let windowScrollY = 0;
-let ticking = false;
+		if (!ticking) {
+			window.requestAnimationFrame(() => {
+				setCurrentItem(windowScrollY, options);
+				ticking = false;
+			});
 
-const options = {
-	blockNames,
-	mobileWidth
+			ticking = true;
+		}
+	};
+
+	window.addEventListener('scroll', scrollHandler);
 };
 
-const scrollHandler = () => {
-	windowScrollY = window.scrollY;
-
-	if (!ticking) {
-		window.requestAnimationFrame(() => {
-			setCurrentItem(windowScrollY, options);
-			ticking = false;
-		});
-
-		ticking = true;
-	}
-};
-
-window.addEventListener('scroll', scrollHandler);
+export default setScroll;

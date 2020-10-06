@@ -65,6 +65,7 @@ const setMetrix = (params) => {
 const getMetrix = (id, mobileWidth) => {
 	setParam(id, mobileWidth);
 
+	// console.log(metrix[id]);
 	return metrix[id];
 };
 
