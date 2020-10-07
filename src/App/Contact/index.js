@@ -6,10 +6,6 @@ const sectionContact = new Contact({
 	desc: 'You can order or make some custom scandinavian' +
 		'tree to contacts us below',
 	contacts: [{
-		name: 'phone:',
-		value: '+38(093) 631-70-33',
-		href: 'tel:+38(093) 631-70-33'
-	}, {
 		name: 'email:',
 		value: 'info@scandinaviantree.com',
 		href: 'mailto:info@scandinaviantree.com?subject=Scandinavian Tree'
@@ -18,26 +14,26 @@ const sectionContact = new Contact({
 	action: 'mailer.php',
 	inputs: [{
 		name: 'name',
-		placeholder: 'Mykola',
+		placeholder: 'Alica',
 		required: 'required',
 		type: 'text',
 		autocomplete: 'name',
 	}, {
 		name: 'phone',
-		placeholder: '+380936317033',
+		placeholder: '+46(0)8-453 81 40',
 		required: '',
 		type: 'tel',
 		autocomplete: 'tel',
 	}, {
 		name: 'email',
-		placeholder: 'mykola@gmail.com',
+		placeholder: 'alica.olsson@gmail.com',
 		required: 'required',
 		type: 'email',
 		autocomplete: 'email'
 	}],
 	textarea: {
 		name: 'message',
-		placeholder: 'Hello Scandinavian Tree',
+		placeholder: 'Hi Scandinavian Tree',
 		required: 'required',
 		rows: '6',
 	}
