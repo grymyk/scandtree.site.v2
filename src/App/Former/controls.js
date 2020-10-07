@@ -150,59 +150,6 @@ const controls = (target, inputsHolder, threeD) => {
 		}
 	};
 
-	function lockControl(elem) {
-		if (elem) {
-			const value = elem.getAttribute('value');
-
-			elem.setAttribute('max', value);
-		}
-	}
-
-	function unlockControl(elem, value) {
-		if (elem && value) {
-			elem.setAttribute('max', value);
-		}
-	}
-
-	function getInput(name) {
-		const selector = 'input[data-parameter="' + name + '"]';
-
-		return inputsHolder.querySelector(selector);
-	}
-
-	function getPlusBtn(input) {
-		return input.nextElementSibling.querySelector('.up');
-	}
-
-	function checkMaxSpread() {
-		const spread = getInput('spread');
-		const branch = getInput('branch');
-		const trunk = getInput('trunk');
-
-		const branchPlusBtn = getPlusBtn(branch);
-		const trunkPlusBtn = getPlusBtn(trunk);
-
-		const valueSpread = spread.getAttribute('value');
-		const maxSpread = spread.getAttribute('max');
-
-		if (valueSpread === maxSpread) {
-			visibleBtn['hide'](branchPlusBtn);
-			visibleBtn['hide'](trunkPlusBtn);
-
-			lockControl(branch);
-			lockControl(trunk);
-		} else {
-			const MAX_BRANCH = '10';
-			const MAX_TRUNK = '3';
-
-			visibleBtn['show'](branchPlusBtn);
-			visibleBtn['show'](trunkPlusBtn);
-
-			unlockControl(branch, MAX_BRANCH);
-			unlockControl(trunk, MAX_TRUNK);
-		}
-	}
-
 	function getInputParameters(input) {
 		const min = +input.getAttribute('min');
 		const max = +input.getAttribute('max');
@@ -241,3 +188,56 @@ const controls = (target, inputsHolder, threeD) => {
 };
 
 export default controls;
+
+/*function lockControl(elem) {
+		if (elem) {
+			const value = elem.getAttribute('value');
+
+			elem.setAttribute('max', value);
+		}
+	}*/
+
+/*function unlockControl(elem, value) {
+	if (elem && value) {
+		elem.setAttribute('max', value);
+	}
+}*/
+
+/*function getInput(name) {
+	const selector = 'input[data-parameter="' + name + '"]';
+
+	return inputsHolder.querySelector(selector);
+}*/
+
+/*function getPlusBtn(input) {
+	return input.nextElementSibling.querySelector('.up');
+}*/
+
+/*function checkMaxSpread() {
+	const spread = getInput('spread');
+	const branch = getInput('branch');
+	const trunk = getInput('trunk');
+
+	const branchPlusBtn = getPlusBtn(branch);
+	const trunkPlusBtn = getPlusBtn(trunk);
+
+	const valueSpread = spread.getAttribute('value');
+	const maxSpread = spread.getAttribute('max');
+
+	if (valueSpread === maxSpread) {
+		visibleBtn['hide'](branchPlusBtn);
+		visibleBtn['hide'](trunkPlusBtn);
+
+		lockControl(branch);
+		lockControl(trunk);
+	} else {
+		const MAX_BRANCH = '10';
+		const MAX_TRUNK = '3';
+
+		visibleBtn['show'](branchPlusBtn);
+		visibleBtn['show'](trunkPlusBtn);
+
+		unlockControl(branch, MAX_BRANCH);
+		unlockControl(trunk, MAX_TRUNK);
+	}
+}*/

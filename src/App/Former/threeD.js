@@ -10,169 +10,8 @@ const threeD = (inputsHolder) => {
 		config.setLimit(limit);
 	}
 
-	function showCountBrowser() {
-		const count = config.getOutputParam('count');
-		const elem = document.querySelector(wrapper.output.count);
-
-		if (elem) {
-			elem.innerHTML = count;
-		}
-	}
-
-	function showAllWidthBrowser() {
-		const width = config.getOutputParam('allWidth');
-		const elem = document.querySelector(wrapper.output.allWidth);
-
-		if (elem) {
-			elem.innerHTML = width;
-		}
-	}
-
-	function showRemainderBrowser() {
-		const remainder = config.getOutputParam('remainder');
-
-		const title = '<span>remainder: </span>';
-		const description = `<span class="remainder">${remainder}</span>mm`;
-		const elem = document.querySelector(wrapper.output.remainderHolder);
-
-		if (elem) {
-			elem.innerHTML = title + description;
-		}
-	}
-
-	function showNumberBoardBrowser() {
-		const number = config.getBoardParam('numberBoard');
-		const elem = document.querySelector(wrapper.output.numberBoard);
-
-		if (elem) {
-			elem.innerHTML = number;
-		}
-	}
-
-	function showPieceWidthBrowser() {
-		//document.querySelector(wrapper.output.piece_width).innerHTML = '';
-
-		const piece = config.getOutputParam('piece');
-
-		const trunk = config.getInputParam('trunk');
-		const branch = config.treeParam('branch');
-
-		const type = branch + trunk;
-
-		const head = '<h3>longs</h3>';
-
-		let list = '<ol>';
-
-		for (let i = 0, j = 1, k = 1, len = piece.length; i < len; i += 1) {
-			if (i % type === 0) {
-				list += '<li>';
-				k += 1;
-			}
-
-			list += '<span>' + piece[i] + '</span> ';
-
-			if (j % type === 0) {
-				list += '</li>';
-			}
-
-		}
-
-		list += '</ol>';
-
-
-		// $(wrapper.output.pieceWidthHolder).html(head + list);
-		// selector = wrapper.output.piece_width;
-		// document.querySelector(selector).innerHTML = head + list;
-	}
-
-	function showCountConsole() {
-		const count = config.getOutputParam('count');
-
-		console.log('Count: %d', count);
-	}
-
-	function showAllWidthConsole() {
-		const width = config.getOutputParam('allWidth');
-
-		console.log('All Width: %s mm', width);
-	}
-
-	function showRemainderConsole() {
-		const remainder = config.getOutputParam('remainder');
-
-		console.log('Remainder: %d mm', remainder);
-	}
-
-	function showNumberBoardConsole() {
-		const number = config.getBoardParam('numberBoard');
-
-		console.log('Number Board: %s mm', number);
-	}
-
-	function showPieceWidthConsole() {
-		const piece = config.getOutputParam('piece');
-
-		console.log('piece: ', piece);
-	}
-
-	function showAdminBrowser() {
-		showAllWidthBrowser();
-		showCountBrowser();
-		showNumberBoardBrowser();
-		showRemainderBrowser();
-		showPieceWidthBrowser();
-	}
-
-	function showAdminConsole() {
-		showAllWidthConsole();
-		showCountConsole();
-		showNumberBoardConsole();
-		showRemainderConsole();
-		showPieceWidthConsole();
-	}
-
-	function pieceDistribution() {
-		const longBoard = config.getInputParam('longBoard');
-
-		const count = config.getOutputParam('count');
-		const raw = config.getBoardParam('raw');
-		const allWidth = config.getOutputParam('allWidth');
-		const width =  count * raw + allWidth;
-
-		if (width > longBoard) {
-			const quotient = width / longBoard;
-
-			config.setBoardParam('numberBoard', Math.ceil(quotient));
-		} else {
-			config.setBoardParam('numberBoard', 1);
-		}
-
-		const numberBoard = config.getBoardParam('numberBoard');
-		const ramainderValue = parseInt(numberBoard * longBoard - width, 10);
-
-		config.setOutputParam('remainder', ramainderValue);
-	}
-
-	function getHeightHolder() {
-		return document.getElementById(wrapper.treeHolder).style.height;
-	}
-
 	function getWidthHolder() {
 		return document.getElementById(wrapper.treeHolder).style.width;
-	}
-
-	function getHeightByOwner() {
-		const owner = config.getOwner();
-		const count = config.getOutputParam('count');
-
-		if (owner === 'user') {
-			return Math.floor(getHeightHolder() / count);
-		} else if (owner === 'admin') {
-			return config.getInputParam('height');
-		} else {
-			console.log('No Owner');
-			return 0;
-		}
 	}
 
 	function boardElem(zIndex, width) {
@@ -208,37 +47,8 @@ const threeD = (inputsHolder) => {
 		const HALF_WIDTH = 2;
 		const fulcrum = config.getInputParam('width');
 		const delta = config.getOutputParam('delta');
-		// console.log('delta:', delta);
 
 		return HALF_WIDTH * index * delta + fulcrum;
-	}
-
-	function getMaxTrunk() {
-		const size = getSizeBranch();
-		const height = config.getInputParam('height');
-		const branch = config.getInputParam('branch');
-		const limit = config.getLimit();
-	}
-
-	function getMaxBranch() {
-		const size = getSizeBranch();
-		const height = config.getInputParam('height');
-		const limit = config.getLimit();
-		const inputsHolder = config.getInputHolder();
-		const spreadInput = inputsHolder.querySelector(wrapper.spreadInput);
-
-		const maxSpread = +spreadInput.getAttribute('max');
-		const alphaRadian = maxSpread * Math.PI / 180;
-
-		return Math.ceil(limit / Math.tan(alphaRadian / 2) / size / height);
-	}
-
-	function setMaxBranch() {
-		const branch = getMaxBranch();
-		const inputsHolder = config.getInputHolder();
-
-		const branchInput = inputsHolder.querySelector(wrapper.branchInput);
-		branchInput.setAttribute('max', branch);
 	}
 
 	function getMaxSpread(branch) {
@@ -309,7 +119,6 @@ const threeD = (inputsHolder) => {
 
 	function setSpread() {
 		const spread = config.getInputParam('spread');
-		// console.log(spread);
 
 		const delta = getDelta(spread);
 
@@ -361,33 +170,6 @@ const threeD = (inputsHolder) => {
 			const elems = makeFragment(branches);
 
 			parent.appendChild(elems);
-		}
-	}
-
-	function showWidthScandTree() {
-		const delta = config.getOutputParam('delta');
-		const count = config.getOutputParam('count');
-
-		const fulcrum = config.getInputParam('width');
-		const maxWidthDec = 2 * (count - 2) * delta + fulcrum - 2 * delta;
-
-		const maxWidth = parseInt(maxWidthDec, 10);
-		const elem = document.querySelector(wrapper.output.width);
-
-		if (elem) {
-			elem.innerHTML = maxWidth;
-		}
-	}
-
-	function showHeightScandTree() {
-		const count = config.getOutputParam('count');
-		const boardHeight = config.getInputParam('height');
-
-		const stHeight = count * boardHeight;
-		const elem = document.querySelector(wrapper.output.height);
-
-		if (elem) {
-			elem.innerHTML = stHeight;
 		}
 	}
 
@@ -637,7 +419,221 @@ const threeD = (inputsHolder) => {
 		resetParams,
 		handlerInput
 	};
-
 };
 
 export default threeD;
+
+/*function showCountBrowser() {
+		const count = config.getOutputParam('count');
+		const elem = document.querySelector(wrapper.output.count);
+
+		if (elem) {
+			elem.innerHTML = count;
+		}
+	}*/
+
+/*function showAllWidthBrowser() {
+	const width = config.getOutputParam('allWidth');
+	const elem = document.querySelector(wrapper.output.allWidth);
+
+	if (elem) {
+		elem.innerHTML = width;
+	}
+}*/
+
+/*function showRemainderBrowser() {
+	const remainder = config.getOutputParam('remainder');
+
+	const title = '<span>remainder: </span>';
+	const description = `<span class="remainder">${remainder}</span>mm`;
+	const elem = document.querySelector(wrapper.output.remainderHolder);
+
+	if (elem) {
+		elem.innerHTML = title + description;
+	}
+}*/
+
+/*function showNumberBoardBrowser() {
+	const number = config.getBoardParam('numberBoard');
+	const elem = document.querySelector(wrapper.output.numberBoard);
+
+	if (elem) {
+		elem.innerHTML = number;
+	}
+}*/
+
+/*function showPieceWidthBrowser() {
+	document.querySelector(wrapper.output.piece_width).innerHTML = '';
+
+	const piece = config.getOutputParam('piece');
+
+	const trunk = config.getInputParam('trunk');
+	const branch = config.treeParam('branch');
+
+	const type = branch + trunk;
+
+	const head = '<h3>longs</h3>';
+
+	let list = '<ol>';
+
+	for (let i = 0, j = 1, len = piece.length; i < len; i += 1) {
+		if (i % type === 0) {
+			list += '<li>';
+		}
+
+		list += '<span>' + piece[i] + '</span> ';
+
+		if (j % type === 0) {
+			list += '</li>';
+		}
+
+	}
+
+	list += '</ol>';
+
+
+	$(wrapper.output.pieceWidthHolder).html(head + list);
+	selector = wrapper.output.piece_width;
+	document.querySelector(selector).innerHTML = head + list;
+}*/
+
+/*function showCountConsole() {
+	const count = config.getOutputParam('count');
+
+	console.log('Count: %d', count);
+}*/
+
+/*function showAllWidthConsole() {
+	const width = config.getOutputParam('allWidth');
+
+	console.log('All Width: %s mm', width);
+}*/
+
+/*function showRemainderConsole() {
+	const remainder = config.getOutputParam('remainder');
+
+	console.log('Remainder: %d mm', remainder);
+}*/
+
+/*function showNumberBoardConsole() {
+	const number = config.getBoardParam('numberBoard');
+
+	console.log('Number Board: %s mm', number);
+}*/
+
+/*function showPieceWidthConsole() {
+	const piece = config.getOutputParam('piece');
+
+	console.log('piece: ', piece);
+}*/
+
+/*function showAdminBrowser() {
+	showAllWidthBrowser();
+	showCountBrowser();
+	showNumberBoardBrowser();
+	showRemainderBrowser();
+	showPieceWidthBrowser();
+}*/
+
+/*function showAdminConsole() {
+	showAllWidthConsole();
+	showCountConsole();
+	showNumberBoardConsole();
+	showRemainderConsole();
+	showPieceWidthConsole();
+}*/
+
+/*function pieceDistribution() {
+	const longBoard = config.getInputParam('longBoard');
+
+	const count = config.getOutputParam('count');
+	const raw = config.getBoardParam('raw');
+	const allWidth = config.getOutputParam('allWidth');
+	const width =  count * raw + allWidth;
+
+	if (width > longBoard) {
+		const quotient = width / longBoard;
+
+		config.setBoardParam('numberBoard', Math.ceil(quotient));
+	} else {
+		config.setBoardParam('numberBoard', 1);
+	}
+
+	const numberBoard = config.getBoardParam('numberBoard');
+	const ramainderValue = parseInt(numberBoard * longBoard - width, 10);
+
+	config.setOutputParam('remainder', ramainderValue);
+}*/
+
+/*function getHeightHolder() {
+	return document.getElementById(wrapper.treeHolder).style.height;
+}*/
+
+/*function getHeightByOwner() {
+	const owner = config.getOwner();
+	const count = config.getOutputParam('count');
+
+	if (owner === 'user') {
+		return Math.floor(getHeightHolder() / count);
+	} else if (owner === 'admin') {
+		return config.getInputParam('height');
+	} else {
+		console.log('No Owner');
+		return 0;
+	}
+}*/
+
+/*function getMaxTrunk() {
+		const size = getSizeBranch();
+		const height = config.getInputParam('height');
+		const branch = config.getInputParam('branch');
+		const limit = config.getLimit();
+	}*/
+
+/*function getMaxBranch() {
+	const size = getSizeBranch();
+	const height = config.getInputParam('height');
+	const limit = config.getLimit();
+	const inputsHolder = config.getInputHolder();
+	const spreadInput = inputsHolder.querySelector(wrapper.spreadInput);
+
+	const maxSpread = +spreadInput.getAttribute('max');
+	const alphaRadian = maxSpread * Math.PI / 180;
+
+	return Math.ceil(limit / Math.tan(alphaRadian / 2) / size / height);
+}*/
+
+/*function setMaxBranch() {
+	const branch = getMaxBranch();
+	const inputsHolder = config.getInputHolder();
+
+	const branchInput = inputsHolder.querySelector(wrapper.branchInput);
+	branchInput.setAttribute('max', branch);
+}*/
+
+/*function showWidthScandTree() {
+		const delta = config.getOutputParam('delta');
+		const count = config.getOutputParam('count');
+
+		const fulcrum = config.getInputParam('width');
+		const maxWidthDec = 2 * (count - 2) * delta + fulcrum - 2 * delta;
+
+		const maxWidth = parseInt(maxWidthDec, 10);
+		const elem = document.querySelector(wrapper.output.width);
+
+		if (elem) {
+			elem.innerHTML = maxWidth;
+		}
+	}*/
+
+/*function showHeightScandTree() {
+	const count = config.getOutputParam('count');
+	const boardHeight = config.getInputParam('height');
+
+	const stHeight = count * boardHeight;
+	const elem = document.querySelector(wrapper.output.height);
+
+	if (elem) {
+		elem.innerHTML = stHeight;
+	}
+}*/

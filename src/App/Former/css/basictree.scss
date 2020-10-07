@@ -90,7 +90,7 @@
   border: none;
   padding: 0 10px 10px;
   background: rgba(170, 170, 170, 0.25);
-  width: 225px;
+  width: 205px;
 
   h4 {
     margin: 10px 0 0;
@@ -131,6 +131,7 @@
         width: 70px;
         height: 30px;
         line-height: 30px;
+        font-size: 16px;
         display: block;
         padding: 0;
         margin: 0;
@@ -142,8 +143,8 @@
         padding: 0 0 0 2px;
         margin: 0 5px;
         width: 40px;
-        height: 28px;
-        line-height: 28px;
+        height: 30px;
+        line-height: 30px;
         float: left;
         font-size: 16px;
         border: 1px solid #fff;
@@ -163,9 +164,25 @@
       .reset {
         cursor: pointer;
         user-select: none;
+        background: #85c47e;
+        color: #fff;
+        height: 28px;
+        line-height: 28px;
+        padding: 0 5px;
+        display: inline-block;
+        float: right;
+        width: 58px;
+        margin: 0 7px 0 0;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 16px;
 
         &.lock {
           cursor: text;
+          font-size: 16px;
+          text-transform: uppercase;
+          background: transparent;
+          color: #777;
         }
       }
     }
@@ -181,12 +198,12 @@
     cursor: pointer;
     font-size: 32px;
     padding: 0 5px;
-    border: 1px solid transparent;
+    border: none;
     display: block;
     float: left;
     margin: 0 0 0 10px;
-    height: 28px;
-    line-height: 28px;
+    height: 30px;
+    line-height: 30px;
     background: #85c47e;
     color: #fff;
     user-select: none;
@@ -195,7 +212,7 @@
       background-color: transparent;
       border-color: transparent;
       cursor: text;
-      color: rgba(170, 170, 170, 0.25);
+      color: #777;
     }
   }
 }
