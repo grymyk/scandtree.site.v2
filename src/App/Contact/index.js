@@ -15,26 +15,17 @@ const sectionContact = new Contact({
 	inputs: [{
 		name: 'name',
 		placeholder: 'Alica',
-		required: 'required',
 		type: 'text',
 		autocomplete: 'name',
 	}, {
-		name: 'phone',
-		placeholder: '+46(0)8-453 81 40',
-		required: '',
-		type: 'tel',
-		autocomplete: 'tel',
-	}, {
 		name: 'email',
 		placeholder: 'alica.olsson@gmail.com',
-		required: 'required',
 		type: 'email',
 		autocomplete: 'email'
 	}],
 	textarea: {
 		name: 'message',
 		placeholder: 'Hi Scandinavian Tree',
-		required: 'required',
 		rows: '6',
 	}
 });
