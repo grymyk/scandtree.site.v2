@@ -7,7 +7,7 @@
 
 .contacts_list {
 	margin: 30px auto 0;
-	width: 280px;
+	width: 88%;
 
 	> li {
 		margin: 10px 0 0;
@@ -145,6 +145,10 @@ form {
 	#contacts .desc {
 		margin: 30px 20px 0;
 	}
+
+	.contacts_list > li li {
+		display: inline-block;
+	}
 }
 
 @media (min-width: 768px) {
@@ -164,38 +168,5 @@ form {
 		.input_item {
 			width: 560px;
 		}
-	}
-}
-
-@media (min-width: 1025px) {
-	.contacts_list, .textarea_holder {
-		width: 660px;
-	}
-
-	.input_list {
-		width: 700px;
-
-		.input_item {
-			width: 660px;
-		}
-	}
-}
-
-@media (min-width: 1281px) {
-	.input_list {
-		width: 960px;
-
-		.input_item {
-			&:last-child {
-				width: 280px;
-			}
-
-			width: 280px;
-		}
-	}
-
-	.contacts_list,
-	.textarea_holder {
-		width: 920px;
 	}
 }

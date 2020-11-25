@@ -1,14 +1,17 @@
 import './contact.scss';
 import Contact from './contact';
 
+const name = 'team@scandinaviantree.com';
+const hyperRef = `mailto:${name}?subject=Scandinavian Tree`;
+
 const sectionContact = new Contact({
 	title: 'contacts',
 	desc: 'You can order or make some custom scandinavian' +
 		'tree to contacts us below',
 	contacts: [{
 		name: 'email:',
-		value: 'info@scandinaviantree.com',
-		href: 'mailto:info@scandinaviantree.com?subject=Scandinavian Tree'
+		value: name,
+		href: hyperRef
 	}],
 	subtitle: 'Make an order',
 	action: 'mailer.php',
