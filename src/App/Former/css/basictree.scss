@@ -1,5 +1,31 @@
+h5 {
+  margin: 30px 0 0;
+  text-transform: uppercase;
+}
+
+ol {
+  margin: 0;
+  padding: 0 0 0 25px;
+}
+
 #scandtree {
   position: relative;
+
+  h4 {
+    padding: 10px 0 0;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+
+/*    &:after {
+      padding: 0 0 0 9px;
+      margin: 0;
+      content: "◂";
+      width: 9px;
+      height: 9px;
+      color: #777;
+    }*/
+  }
 }
 
 #tree_holder {
@@ -9,7 +35,7 @@
   margin: 85px 0 0;
 
   ul {
-    height: 100%;
+    height: 330px;
     display: block;
 
     li {
@@ -22,7 +48,7 @@
   }
 }
 .prism_holder {
-  height: 20px;
+  height: 10px;
   position: relative;
   perspective: 400px;
   perspective-origin: -142% -400%;
@@ -70,43 +96,35 @@
   background: #b7a05c;
 }
 
-.output {
-  position: absolute;
-  left:0;
-  top: -60px;
-  border: 1px solid #000;
-  border-left: none;
-  border-top: none;
-  padding: 0 10px 10px;
-  background: rgba(#FAF6ED, 0.75);
-  z-index: 2;
+#input_params,
+#output_params {
+  li {
+    overflow: hidden;
+    margin: 20px 0;
+
+    label {
+      width: 70px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 16px;
+      display: block;
+      padding: 0;
+      margin: 0;
+      float: left;
+      text-transform: uppercase;
+    }
+  }
 }
 
 #input_params {
   position: absolute;
   z-index: 3;
-  right: 0;
+  left: 0;
   top: -60px;
   border: none;
   padding: 0 10px 10px;
-  background: rgba(170, 170, 170, 0.25);
-  width: 205px;
-
-  h4 {
-    margin: 10px 0 0;
-    text-transform: uppercase;
-    text-align: center;
-    cursor: pointer;
-
-    &:after {
-      padding: 0 0 0 9px;
-      margin: 0;
-      content: "◂";
-      width: 9px;
-      height: 9px;
-      color: #777;
-    }
-  }
+  background: rgba(170, 170, 170, 0.45);
+  width: 222px;
 
   ul {
     display: none;
@@ -114,35 +132,21 @@
 }
 
 #input_params.open {
-  h4 {
+/*  h4 {
     &:after {
       content: '▾';
     }
-  }
+  }*/
 
   ul {
     display: block;
 
     li {
-      overflow: hidden;
-      margin: 20px 0;
-
-      label {
-        width: 70px;
-        height: 30px;
-        line-height: 30px;
-        font-size: 16px;
-        display: block;
-        padding: 0;
-        margin: 0;
-        float: left;
-        text-transform: uppercase;
-      }
 
       input {
         padding: 0 0 0 2px;
         margin: 0 5px;
-        width: 40px;
+        width: 60px;
         height: 30px;
         line-height: 30px;
         float: left;
@@ -172,10 +176,14 @@
         display: inline-block;
         float: right;
         width: 58px;
-        margin: 0 7px 0 0;
+        margin: 0 2px 0 0;
         text-align: center;
         text-transform: uppercase;
         font-size: 16px;
+        border: none;
+        border-top: 1px solid #777;
+        border-right: 1px solid #777;
+
 
         &.lock {
           cursor: text;
@@ -183,8 +191,46 @@
           text-transform: uppercase;
           background: transparent;
           color: #777;
+          border: none;
+
+          &:hover {
+            background: transparent;
+          }
+        }
+
+        &:hover {
+          background: rgba(133,196,126,.7);
         }
       }
+    }
+  }
+}
+
+#output_params {
+  position: static;
+  border: none;
+  padding: 0 10px 10px;
+  background: rgba(170, 170, 170, 0.15);
+  width: 222px;
+
+  li {
+    label {
+      width: 155px;
+    }
+  }
+
+  span {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+  }
+
+  .piece_width {
+    li {
+      overflow: inherit;
+      margin: 5px 0 0;
+      color: #000;
     }
   }
 }
@@ -199,6 +245,8 @@
     font-size: 32px;
     padding: 0 5px;
     border: none;
+    border-top: 1px solid #777;
+    border-right: 1px solid #777;
     display: block;
     float: left;
     margin: 0 0 0 10px;
@@ -213,27 +261,45 @@
       border-color: transparent;
       cursor: text;
       color: #777;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    &:hover {
+      background: rgba(133,196,126,.7);
     }
   }
 }
 
 
 #former {
+
   .content {
     width: 210px;
     margin: 0 auto;
+    //position: relative;
   }
 }
 
 @media (min-width: 481px) {
   #former .content {
-    width: 310px;
+    //width: 310px;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   #former .content {
     width: 690px;
+  }
+
+  #output_params {
+      position: absolute;
+      right: 0;
+      top: -60px;
+      z-index: 2;
+      margin: 0;
   }
 }
 

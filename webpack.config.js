@@ -60,7 +60,7 @@ module.exports = {
 	resolve: {
 		extensions: ['*', '.js']
 	},
-	devtool: 'source-map',
+	// devtool: 'source-map',
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: './src/index.html'

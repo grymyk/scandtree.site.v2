@@ -1,26 +1,23 @@
 <div class="content">
     <h2>{{title}}</h2>
-
     <div id="scandtree">
-        <div id="tree_holder"></div>
-
-        <div id="input_params">
-            <h4 data-action="toggle">{{subtitle}}</h4>
+        <div id="input_params" class="open">
+            <h4>{{inputs.subtitle}}</h4>
 
             <ul>
-                {{#each inputs}}
+                {{#each inputs.params}}
                     <li class="mode">
                         <label for={{this.name}}>{{this.name}}</label>
                         <input data-parameter={{this.name}}
-                               value={{this.value}}
-                               id={{this.name}}
-                               min={{this.min}}
-                               max={{this.max}}
-                               name={{this.name}}
-                               type="tel"
-                               step="1"
-                               readonly
-                               class="readonly"
+                            name={{this.name}}
+                            id={{this.name}}
+                            value={{this.value}}
+                            min={{this.min}}
+                            max={{this.max}}
+                            step={{this.step}}
+                            class={{this.cls}}
+                            type="number"
+                            readonly
                         />
                         <div class="voter">
                             <span class="down"
@@ -41,10 +38,23 @@
                 <li>
                     <span class="reset lock"
                           data-action="reset"
-                    >{{reset}}
+                    >{{inputs.reset}}
                     </span>
                 </li>
             </ul>
+        </div>
+        <div id="tree_holder"></div>
+        <div id="output_params">
+            <h4 >{{outputs.subtitle}}</h4>
+            <ul>
+                {{#each outputs.params}}
+                    <li>
+                        <label>{{this}}:</label>
+                        <span class={{this}}></span>
+                    </li>
+                {{/each}}
+            </ul>
+            <div class="piece_width"></div>
         </div>
     </div>
 </div>

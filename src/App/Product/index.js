@@ -13,10 +13,10 @@ const sectionFormer = new Product({
 		},
 		params: [{
 			name: 'height:',
-			size: '22 sm'
+			size: '22sm'
 		}, {
 			name: 'branch:',
-			size: '5 peaces.'
+			size: '5peaces'
 		}]
 	}, {
 		subtitle: 'big',
@@ -29,7 +29,7 @@ const sectionFormer = new Product({
 			size: '1m'
 		}, {
 			name: 'branch:',
-			size: '17peaces.'
+			size: '17peaces'
 		}]
 	}]
 });

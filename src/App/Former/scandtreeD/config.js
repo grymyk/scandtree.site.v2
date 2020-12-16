@@ -1,39 +1,34 @@
 import wrapper from './wrapper';
 
 const config = {
-	board: {
-		numberBoard: 1,
-		raw: 2
-	},
-
 	input: {
-		width: 16,
 		height: 10,
+		width: 16,
+		long: 1000,
+		trunk: 2,
 		branch: 10,
-		longBoard: 1000,
 		spread: 25,
-		trunk: 2
 	},
 
 	output: {
 		count: null,
 		delta: null,
 		scaleX: 1,
-		allWidth: 0,
+		totalWidth: 0,
 		piece: [],
-		remainder: 0
+		remainder: 0,
+		numberBoard: 1,
+		raw: 2
 	},
 
 	tree: {
-		trunk: 1,
+		first: 1,
 		branch: 2,
-		last: 0
+		trunk: 1
 	},
 
 	owner: 'user',
-
 	limit: 0,
-
 	inputHolder: null,
 
 	setInputHolder(elem) {
@@ -62,14 +57,6 @@ const config = {
 
 	setOutputParam(property, value) {
 		config.output[property] = value;
-	},
-
-	getBoardParam(property) {
-		return +config.board[property];
-	},
-
-	setBoardParam(property, value) {
-		config.board[property] = value;
 	},
 
 	getOwner() {

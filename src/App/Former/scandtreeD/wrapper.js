@@ -6,13 +6,13 @@ const wrapper = {
 	trunkInput: '#input_params input[data-parameter="trunk"]',
 
 	output: {
-		height: '.output .height',
-		width: '.output .width',
-		allWidth: '.output .all_width',
-		count: '.output .count',
-		numberBoard: '.output .number_board',
-		remainderHolder: '.output .remainder_holder',
-		pieceWidthHolder: '.output .piece_width_holder'
+		count: '#output_params .count',
+		height: '#output_params .height',
+		maxWidth: '#output_params .max_width',
+		numberBoard: '#output_params .number_board',
+		remainder: '#output_params .remainder',
+		totalWidth: '#output_params .total_width',
+		pieceWidth: '#output_params .piece_width'
 	},
 
 	treeHolder: 'tree_holder',

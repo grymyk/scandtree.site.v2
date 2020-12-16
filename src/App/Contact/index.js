@@ -28,7 +28,7 @@ const sectionContact = new Contact({
 	}],
 	textarea: {
 		name: 'message',
-		placeholder: 'Hi Scandinavian Tree',
+		placeholder: 'Hi Scandinavian Tree,',
 		rows: '6',
 	}
 });

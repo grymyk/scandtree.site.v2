@@ -2,7 +2,7 @@ const cls = 'lock';
 const usual = {
 	width: 16,
 	height: 10,
-	longBoard: 1000,
+	long: 1000,
 	trunk: 2,
 	branch: 7,
 	spread: 25
@@ -83,6 +83,7 @@ function changeParam(input, sib, step) {
 
 		if (min <= value && value <= max) {
 			input.setAttribute('value', value);
+
 			visibleBtn['show'](sib);
 		} else {
 			visibleBtn['hide'](elem);
@@ -127,10 +128,10 @@ const controls = (target, inputsHolder, threeD) => {
 
 			const liParent = elem.parentNode.parentNode;
 			input = liParent.querySelector('input');
-
-			handleChange(input);
+			// console.log('input', input);
 
 			const sign = elem.getAttribute('data-action-change');
+			// console.log('sign', sign);
 
 			if (sign) {
 				signAction[sign](input);
@@ -138,6 +139,8 @@ const controls = (target, inputsHolder, threeD) => {
 
 			generateChangeEvent(input);
 			unLockResetBtn();
+
+			handleChange(input);
 		},
 
 		reset: () => {

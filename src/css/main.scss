@@ -6,8 +6,9 @@ input[type="reset"],
 .button,
 button {
 	background-color: #85c47e;
-	border: 0;
-	//border-radius: 2.5em;
+	border: none;
+	border-top: 1px solid #777;
+	border-right: 1px solid #777;
 	color: #fff;
 	cursor: pointer;
 	display: inline-block;

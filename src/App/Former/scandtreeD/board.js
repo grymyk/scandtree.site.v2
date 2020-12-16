@@ -106,10 +106,10 @@ const boardForm = {
 	},
 
 	branchStyleTemplate(options) {
-		const { width, zIndex } = options;
+		const { width, zIndex, height } = options;
 
-		return `width: ${width}px; z-index: ${zIndex}`;
-		// height: ${heigt}px;
+		return `width: ${width}px; z-index: ${zIndex};
+			height: ${height}px`;
 	},
 
 	setBoardStyles(zIndex, width) {
@@ -122,10 +122,44 @@ const boardForm = {
 		};
 
 		return boardForm.branchStyleTemplate(options);
+	},
+
+	getAllWidth() {
+		const count = config.getOutputParam('count');
+		const raw = config.getOutputParam('raw');
+		const allWidth = config.getOutputParam('totalWidth');
+
+		return count * raw + allWidth;
+	},
+
+	setNumberBoard() {
+		const long = config.getInputParam('long');
+		const width = boardForm.getAllWidth();
+
+		let numberBoard = 1;
+
+		if (width > long) {
+			const quotient = width / long;
+
+			numberBoard = Math.ceil(quotient);
+		}
+
+		config.setOutputParam('numberBoard', numberBoard);
+	},
+
+	setRemainder() {
+		const long = config.getInputParam('long');
+		const width = boardForm.getAllWidth();
+		const numberBoard = config.getOutputParam('numberBoard');
+		const remainder = parseInt(numberBoard * long - width, 10);
+
+		config.setOutputParam('remainder', remainder);
 	}
 };
 
 export default {
 	setBoardStyles: boardForm.setBoardStyles,
-	getBoardTemplate: boardForm.getBoardTemplate
+	getBoardTemplate: boardForm.getBoardTemplate,
+	setNumberBoard: boardForm.setNumberBoard,
+	setRemainder: boardForm.setRemainder
 };

@@ -1,5 +1,7 @@
 import config from './scandtreeD/config';
 import wrapper from './scandtreeD/wrapper';
+import shower from './scandtreeD/shower';
+import BranchLib from './scandtreeD/branch';
 import board from './scandtreeD/board';
 
 const threeD = (inputsHolder) => {
@@ -14,165 +16,6 @@ const threeD = (inputsHolder) => {
 		return document.getElementById(wrapper.treeHolder).style.width;
 	}
 
-	function boardElem(zIndex, width) {
-		const li = document.createElement('LI');
-
-		li.style.cssText = board.setBoardStyles(zIndex, width);
-		li.innerHTML = board.getBoardTemplate(width);
-
-		return li;
-	}
-
-	function getSizeBranch() {
-		const short = config.getInputParam('trunk');
-		const longBoard = config.treeParam('branch');
-
-		return short + longBoard;
-	}
-
-	function periodBranch(index) {
-		const size = getSizeBranch();
-
-		return Math.floor(Math.floor(index / size));
-	}
-
-	function getLongBoard(index) {
-		const longBoard = config.treeParam('branch');
-		const size = getSizeBranch();
-
-		return Math.floor(index %  size / longBoard);
-	}
-
-	function getWidthBranch(index) {
-		const HALF_WIDTH = 2;
-		const fulcrum = config.getInputParam('width');
-		const delta = config.getOutputParam('delta');
-
-		return HALF_WIDTH * index * delta + fulcrum;
-	}
-
-	function getMaxSpread(branch) {
-		const STEP = 5;
-		const MAX_BRANCH = 10;
-		const size = getSizeBranch();
-		const height = config.getInputParam('height');
-		branch = MAX_BRANCH || config.getInputParam('branch');
-
-		const limit = config.getLimit();
-		const tgA = branch * height * size / limit;
-		const alphaRadian = Math.atan(tgA);
-		const alphaDegree = Math.floor(alphaRadian * 180 / Math.PI);
-		const maxSpread = 180 - 2 * alphaDegree;
-
-		return Math.floor(maxSpread / STEP) * STEP;
-	}
-
-	function setMaxSpread() {
-		const spread = getMaxSpread();
-
-		const spreadInput = document.querySelector(wrapper.spreadInput);
-		spreadInput.setAttribute('max', spread);
-	}
-
-	function createBranchElems(i, len) {
-		const fulcrum = config.getInputParam('width');
-
-		let width = 0;
-
-		let zIndex = -i;
-
-		const boards = [];
-
-		for (let j = 0; i < len; i += 1) {
-			width = fulcrum;
-
-			if (j === 0)  {
-				const n = periodBranch(i);
-
-				width = getWidthBranch(n) + fulcrum;
-			}
-
-			boards.push(boardElem(zIndex, width));
-
-			zIndex -= 1;
-
-			j = getLongBoard(i);
-		}
-
-		return boards;
-	}
-
-	function getDelta(spread) {
-		const MAX_SPREAD = 179;
-
-		const height = config.getInputParam('height');
-		const size = getSizeBranch();
-
-		if (0 < spread && spread < MAX_SPREAD) {
-			const radian = (90 - spread / 2) * Math.PI / 180;
-
-			return size * height / Math.tan(radian);
-		}
-
-		return 0;
-	}
-
-	function setSpread() {
-		const spread = config.getInputParam('spread');
-
-		const delta = getDelta(spread);
-
-		config.setOutputParam('delta', delta);
-	}
-
-	function setCount() {
-		const longBoard = config.treeParam('branch');
-		const lastBranch = config.treeParam('last');
-
-		const branch = config.getInputParam('branch');
-
-		const short = config.getInputParam('trunk');
-
-		if (branch > 0 && short >= 1) {
-			let count = (longBoard + short) * branch;
-			count += lastBranch;
-
-			config.setOutputParam('count', count);
-		}
-	}
-
-	function getTopBoard() {
-		const zIndex = 0;
-		const width = config.getInputParam('width');
-
-		return boardElem(zIndex, width);
-	}
-
-	function showScandTree() {
-		const branchesHolder = document.createElement('UL');
-		const holder = document.getElementById(wrapper.treeHolder);
-		holder.appendChild(branchesHolder);
-
-		const topBoard = getTopBoard();
-
-		const parent = document.querySelector(wrapper.treeParent);
-		parent.appendChild(topBoard);
-
-		const branch = config.getInputParam('branch');
-		const size = getSizeBranch('size');
-
-		const i = 1;
-		const len = branch * size + 1;
-
-		const branches = createBranchElems(i, len);
-
-		if (branches) {
-			const elems = makeFragment(branches);
-
-			parent.appendChild(elems);
-		}
-	}
-
 	function setMaxCount(width) {
 		const delta = config.getOutputParam('delta');
 		const fulcrum = config.getInputParam('width');
@@ -182,29 +25,17 @@ const threeD = (inputsHolder) => {
 		config.setOutputParam('count', count);
 	}
 
-	function makeFragment(boards) {
-		const fragment = document.createDocumentFragment();
-
-		boards.forEach((board) => {
-			fragment.appendChild(board);
-		});
-
-		return fragment;
-	}
-
 	function appendBranch() {
 		const parent = document.querySelector(wrapper.treeParent);
-
 		const count = config.getOutputParam('count');
-		const size = getSizeBranch();
+		const size = BranchLib.getSizeBranch();
 
-		const i = count + 1;
-		const len = count + size + 1;
+		const len = count + size;
 
-		const newBranches = createBranchElems(i, len);
+		const newBranches = BranchLib.createBranchElems(count, len);
 
 		if (newBranches) {
-			const fragment = makeFragment(newBranches);
+			const fragment = BranchLib.makeFragment(newBranches);
 
 			if (parent) {
 				parent.appendChild(fragment);
@@ -219,7 +50,7 @@ const threeD = (inputsHolder) => {
 
 		if (parent) {
 			const branches = parent.getElementsByTagName('LI');
-			const size = getSizeBranch();
+			const size = BranchLib.getSizeBranch();
 
 			const begin = branches.length - 1;
 			const finish = begin - diff * size;
@@ -239,25 +70,38 @@ const threeD = (inputsHolder) => {
 		if (holder) {
 			holder.removeChild(tree);
 		}
+
+		config.setOutputParam('piece', []);
+	}
+
+	function setLongs(board) {
+		const width = board.style.getPropertyValue('width');
+		return +width.slice(0, -2);
 	}
 
 	function makeTransform() {
 		const scaleX = config.getOutputParam('scaleX');
-		const size = getSizeBranch();
+		const size = BranchLib.getSizeBranch();
 		const holder = document.getElementById('tree_holder');
 		const parent = holder.firstChild;
+
+		const piece = [];
 
 		if (parent) {
 			const boards = parent.getElementsByTagName('LI');
 			const value = 'scaleX(' + scaleX + ')';
+			const len = boards.length;
 
-			for (let i = 1, len = boards.length; i < len;) {
+			for (let i = 1; i < len; i += size) {
 				boards[i].style.setProperty('transform', value, '');
 				boards[i + 1].style.setProperty('transform', value, '');
 
-				i += size;
+				const width = Math.ceil(setLongs(boards[i]) * scaleX);
+				piece.push(width);
 			}
 		}
+
+		config.setOutputParam('piece', piece);
 	}
 
 	function getDeformation(newSpread) {
@@ -267,8 +111,8 @@ const threeD = (inputsHolder) => {
 		const alpha = oldSpread * RADIAN;
 		const beta = newSpread * RADIAN;
 
-		const coef = Math.tan(beta) / Math.tan(alpha);
-		config.setOutputParam('scaleX', coef);
+		const koef = Math.tan(beta) / Math.tan(alpha);
+		config.setOutputParam('scaleX', koef);
 	}
 
 	function scaleX(spread) {
@@ -282,17 +126,79 @@ const threeD = (inputsHolder) => {
 
 	function handlerInput(options) {
 		const strategies = {
+			height: (parameter, value) => {
+				deleteScandTree();
+
+				config.setInputParam(parameter, value);
+
+				BranchLib.getScandTree();
+			},
+
+			width: (parameter, value) => {
+				deleteScandTree();
+
+				config.setInputParam(parameter, value);
+
+				BranchLib.getScandTree();
+				BranchLib.setMaxWidthBranch();
+			},
+
+			long: (parameter, value) => {
+				config.setInputParam(parameter, value);
+
+				board.setNumberBoard();
+				board.setRemainder();
+			},
+
+			trunk: (parameter, value) => {
+				deleteScandTree();
+
+				config.setInputParam(parameter, value);
+
+				BranchLib.setSpread();
+				BranchLib.setCount();
+
+				BranchLib.getScandTree();
+				makeTransform();
+			},
+
+			branch: (parameter, value) => {
+				BranchLib.setCount();
+
+				const currentBranch = config.getInputParam(parameter);
+
+				let diff = value - currentBranch;
+
+				if (diff > 0) {
+					appendBranch();
+					makeTransform();
+				} else if (diff < 0) {
+					diff = Math.abs(diff);
+
+					deleteBranch(diff);
+					BranchLib.removeLastLong();
+				}
+
+				config.setInputParam(parameter, value);
+			},
+
+			spread: (parameter, value) => {
+				BranchLib.setCount();
+				updateScandTree(value);
+			},
+
 			board: (parameter, value) => {
 				config.setInputParam(parameter, value);
 			},
 
-			width: (width, value) => {
+
+			/*width: (width, value) => {
 				setMaxCount(value);
-			},
+			},*/
 
 			typeTree: (parameter, value) => {
 				if (parameter === 'branch') {
-					setCount();
+					BranchLib.setCount();
 
 					const current = config.getInputParam(parameter);
 					let diff = value - current;
@@ -309,7 +215,7 @@ const threeD = (inputsHolder) => {
 					config.setInputParam(parameter, value);
 
 				} else if (parameter === 'spread') {
-					setCount();
+					BranchLib.setCount();
 
 					updateScandTree(value);
 				} else if (parameter === 'trunk') {
@@ -317,47 +223,12 @@ const threeD = (inputsHolder) => {
 
 					config.setInputParam(parameter, value);
 
-					setSpread();
-					setCount();
+					BranchLib.setSpread();
+					BranchLib.setCount();
 
-					showScandTree();
+					BranchLib.getScandTree();
 					makeTransform();
 				}
-			},
-
-			trunk: (parameter, value) => {
-				deleteScandTree();
-
-				config.setInputParam(parameter, value);
-
-				setSpread();
-				setCount();
-
-				showScandTree();
-				makeTransform();
-			},
-
-			branch: (parameter, value) => {
-				setCount();
-
-				const current = config.getInputParam(parameter);
-				let diff = value - current;
-
-				if (diff > 0) {
-					appendBranch();
-					makeTransform();
-				} else if (diff < 0) {
-					diff = Math.abs(diff);
-
-					deleteBranch(diff);
-				}
-
-				config.setInputParam(parameter, value);
-			},
-
-			spread: (parameter, value) => {
-				setCount();
-				updateScandTree(value);
 			}
 		};
 
@@ -366,51 +237,46 @@ const threeD = (inputsHolder) => {
 		const strategy = strategies[parameter];
 
 		strategy(parameter, value);
+
+		showOutput();
 	}
 
-	function getInputValues() {
-		const inputsHolder = config.getInputHolder();
-		const inputs = inputsHolder.querySelectorAll('input');
-
-		for (let i = 0, len = inputs.length; i < len; i += 1) {
-			const property = inputs[i].getAttribute('data-parameter');
-			const value = +inputs[i].getAttribute('value');
-
-			config.setInputParam(property, value);
-		}
-	}
-
-	function setInputHolder(elem) {
-		config.setInputHolder(elem);
+	function showOutput() {
+		shower.countPiece();
+		shower.heightScandTree();
+		shower.widthScandTree();
+		shower.numberBoard();
+		shower.remainder();
+		shower.totalWidth();
+		// shower.pieceWidth();
 	}
 
 	const resetParams = () => {
 		deleteScandTree();
 
-		getInputValues();
-		setSpread();
+		BranchLib.getInputValues();
+		BranchLib.setSpread();
+		BranchLib.setCount();
 
-		setCount();
+		BranchLib.getScandTree();
 
-		showScandTree();
+		showOutput();
 	};
 
 	function init(input) {
-		setInputHolder(input);
+		BranchLib.setInputHolder(input);
+		BranchLib.getInputValues();
+		BranchLib.setSpread();
+		// BranchLib.setMaxSpread();
+		BranchLib.setCount();
+		BranchLib.setMaxWidthBranch();
 
-		getInputValues();
-		setSpread();
+		board.setNumberBoard();
+		board.setRemainder();
 
-		setMaxWidthLimit();
-		setMaxSpread();
+		BranchLib.getScandTree();
 
-		showScandTree();
-
-		// showHeightScandTree();
-		// showWidthScandTree();
-
-		// showAdminBrowser();
-		// showAdminConsole();
+		showOutput();
 	}
 
 	init(inputsHolder);
@@ -422,166 +288,6 @@ const threeD = (inputsHolder) => {
 };
 
 export default threeD;
-
-/*function showCountBrowser() {
-		const count = config.getOutputParam('count');
-		const elem = document.querySelector(wrapper.output.count);
-
-		if (elem) {
-			elem.innerHTML = count;
-		}
-	}*/
-
-/*function showAllWidthBrowser() {
-	const width = config.getOutputParam('allWidth');
-	const elem = document.querySelector(wrapper.output.allWidth);
-
-	if (elem) {
-		elem.innerHTML = width;
-	}
-}*/
-
-/*function showRemainderBrowser() {
-	const remainder = config.getOutputParam('remainder');
-
-	const title = '<span>remainder: </span>';
-	const description = `<span class="remainder">${remainder}</span>mm`;
-	const elem = document.querySelector(wrapper.output.remainderHolder);
-
-	if (elem) {
-		elem.innerHTML = title + description;
-	}
-}*/
-
-/*function showNumberBoardBrowser() {
-	const number = config.getBoardParam('numberBoard');
-	const elem = document.querySelector(wrapper.output.numberBoard);
-
-	if (elem) {
-		elem.innerHTML = number;
-	}
-}*/
-
-/*function showPieceWidthBrowser() {
-	document.querySelector(wrapper.output.piece_width).innerHTML = '';
-
-	const piece = config.getOutputParam('piece');
-
-	const trunk = config.getInputParam('trunk');
-	const branch = config.treeParam('branch');
-
-	const type = branch + trunk;
-
-	const head = '<h3>longs</h3>';
-
-	let list = '<ol>';
-
-	for (let i = 0, j = 1, len = piece.length; i < len; i += 1) {
-		if (i % type === 0) {
-			list += '<li>';
-		}
-
-		list += '<span>' + piece[i] + '</span> ';
-
-		if (j % type === 0) {
-			list += '</li>';
-		}
-
-	}
-
-	list += '</ol>';
-
-
-	$(wrapper.output.pieceWidthHolder).html(head + list);
-	selector = wrapper.output.piece_width;
-	document.querySelector(selector).innerHTML = head + list;
-}*/
-
-/*function showCountConsole() {
-	const count = config.getOutputParam('count');
-
-	console.log('Count: %d', count);
-}*/
-
-/*function showAllWidthConsole() {
-	const width = config.getOutputParam('allWidth');
-
-	console.log('All Width: %s mm', width);
-}*/
-
-/*function showRemainderConsole() {
-	const remainder = config.getOutputParam('remainder');
-
-	console.log('Remainder: %d mm', remainder);
-}*/
-
-/*function showNumberBoardConsole() {
-	const number = config.getBoardParam('numberBoard');
-
-	console.log('Number Board: %s mm', number);
-}*/
-
-/*function showPieceWidthConsole() {
-	const piece = config.getOutputParam('piece');
-
-	console.log('piece: ', piece);
-}*/
-
-/*function showAdminBrowser() {
-	showAllWidthBrowser();
-	showCountBrowser();
-	showNumberBoardBrowser();
-	showRemainderBrowser();
-	showPieceWidthBrowser();
-}*/
-
-/*function showAdminConsole() {
-	showAllWidthConsole();
-	showCountConsole();
-	showNumberBoardConsole();
-	showRemainderConsole();
-	showPieceWidthConsole();
-}*/
-
-/*function pieceDistribution() {
-	const longBoard = config.getInputParam('longBoard');
-
-	const count = config.getOutputParam('count');
-	const raw = config.getBoardParam('raw');
-	const allWidth = config.getOutputParam('allWidth');
-	const width =  count * raw + allWidth;
-
-	if (width > longBoard) {
-		const quotient = width / longBoard;
-
-		config.setBoardParam('numberBoard', Math.ceil(quotient));
-	} else {
-		config.setBoardParam('numberBoard', 1);
-	}
-
-	const numberBoard = config.getBoardParam('numberBoard');
-	const ramainderValue = parseInt(numberBoard * longBoard - width, 10);
-
-	config.setOutputParam('remainder', ramainderValue);
-}*/
-
-/*function getHeightHolder() {
-	return document.getElementById(wrapper.treeHolder).style.height;
-}*/
-
-/*function getHeightByOwner() {
-	const owner = config.getOwner();
-	const count = config.getOutputParam('count');
-
-	if (owner === 'user') {
-		return Math.floor(getHeightHolder() / count);
-	} else if (owner === 'admin') {
-		return config.getInputParam('height');
-	} else {
-		console.log('No Owner');
-		return 0;
-	}
-}*/
 
 /*function getMaxTrunk() {
 		const size = getSizeBranch();
@@ -609,31 +315,4 @@ export default threeD;
 
 	const branchInput = inputsHolder.querySelector(wrapper.branchInput);
 	branchInput.setAttribute('max', branch);
-}*/
-
-/*function showWidthScandTree() {
-		const delta = config.getOutputParam('delta');
-		const count = config.getOutputParam('count');
-
-		const fulcrum = config.getInputParam('width');
-		const maxWidthDec = 2 * (count - 2) * delta + fulcrum - 2 * delta;
-
-		const maxWidth = parseInt(maxWidthDec, 10);
-		const elem = document.querySelector(wrapper.output.width);
-
-		if (elem) {
-			elem.innerHTML = maxWidth;
-		}
-	}*/
-
-/*function showHeightScandTree() {
-	const count = config.getOutputParam('count');
-	const boardHeight = config.getInputParam('height');
-
-	const stHeight = count * boardHeight;
-	const elem = document.querySelector(wrapper.output.height);
-
-	if (elem) {
-		elem.innerHTML = stHeight;
-	}
 }*/
