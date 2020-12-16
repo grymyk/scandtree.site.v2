@@ -35,7 +35,8 @@ ol {
   margin: 85px 0 0;
 
   ul {
-    height: 330px;
+    min-height: 330px;
+    max-height: 510px;
     display: block;
 
     li {
@@ -279,13 +280,6 @@ ol {
   .content {
     width: 210px;
     margin: 0 auto;
-    //position: relative;
-  }
-}
-
-@media (min-width: 481px) {
-  #former .content {
-    //width: 310px;
   }
 }
 

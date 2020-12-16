@@ -10,5 +10,3 @@ package-lock.json
 
 server.express.js
 dist/*
-
-expigrt/*
